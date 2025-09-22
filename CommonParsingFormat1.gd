@@ -80,6 +80,14 @@ static func enemy_from_string(encodedEnemy: String, root: Node2D):
 	CommonLoadFormat1.add_enemy(type, props, root)
 
 
+static func coin_from_string(encodedCoin: String, root: Node2D):
+	print("coin:", encodedCoin)
+	encodedCoin = encodedCoin.trim_prefix("coin type=\"Coin\"]\n")
+	var props = split_props(encodedCoin)
+	print("props:", props)
+	CommonLoadFormat1.add_coin(props, root)
+
+
 static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
 		print("You try to load not a level file!")
@@ -88,6 +96,8 @@ static func make_tree_from_string(str: String, root: Node2D):
 	print(split_str)
 	for object_str in split_str:
 		if object_str.begins_with("enemy"):
-			enemy_from_string.call(object_str, root)
+			enemy_from_string(object_str, root)
 		if object_str.begins_with("quadrant"):
-			quadrant_from_string.call(object_str, root)
+			quadrant_from_string(object_str, root)
+		if object_str.begins_with("coin"):
+			coin_from_string(object_str, root)

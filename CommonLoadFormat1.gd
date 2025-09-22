@@ -22,6 +22,12 @@ static func add_quadrant(properties: Dictionary[String, Variant], root: Node2D):
 	add_child(node, root, properties)
 
 
+static func add_coin(properties: Dictionary[String, Variant], root: Node2D):
+	var node: Node2D = config.CoinScene.instantiate()
+	print("coin name:", node.name)
+	add_child(node, root, properties)
+
+
 static func add_enemy(type: String, properties: Dictionary[String, Variant], root: Node2D):
 	print("scenes:", config.enemiesScenes)
 	var node: Node2D = config.enemiesScenes.get(type).instantiate()
