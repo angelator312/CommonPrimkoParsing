@@ -13,7 +13,7 @@ static func load(_level_name: String, path: String, root: Node2D, _config: Commo
 	config = _config
 	delete_all_children_recursive(root)
 	var file_contents = FileAccess.get_file_as_string(path)
-	CommonParsingFormat1.make_tree_from_string(file_contents, root, add_enemy, add_quadrant)
+	CommonParsingFormat1.make_tree_from_string(file_contents, root)
 
 
 static func add_quadrant(properties: Dictionary[String, Variant], root: Node2D):

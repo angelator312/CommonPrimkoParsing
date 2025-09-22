@@ -56,15 +56,15 @@ static func parse_property(str: String) -> Variant:
 	return ""
 
 
-static func quadrant_from_string(encodedQuadrant: String, root: Node2D, add_quadrant_func: Callable):
+static func quadrant_from_string(encodedQuadrant: String, root: Node2D):
 	print("quadrant:", encodedQuadrant)
 	encodedQuadrant = encodedQuadrant.trim_prefix("quadrant type=\"Quadrant\"]\n")
 	var props = split_props(encodedQuadrant)
 	print("props:", props)
-	add_quadrant_func.call(props, root)
+	CommonLoadFormat1.add_quadrant(props, root)
 
 
-static func enemy_from_string(encodedEnemy: String, root: Node2D, add_enemy: Callable):
+static func enemy_from_string(encodedEnemy: String, root: Node2D):
 	print("enemy:", encodedEnemy)
 	encodedEnemy = encodedEnemy.trim_prefix("enemy type=")
 	var type = ""
@@ -77,10 +77,10 @@ static func enemy_from_string(encodedEnemy: String, root: Node2D, add_enemy: Cal
 	print(type)
 	var props = split_props(encodedEnemy)
 	print("props:", props)
-	add_enemy.call(type, props, root)
+	CommonLoadFormat1.add_enemy(type, props, root)
 
 
-static func make_tree_from_string(str: String, root: Node2D, add_enemy: Callable, add_quadrant: Callable):
+static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
 		print("You try to load not a level file!")
 		return
@@ -88,6 +88,6 @@ static func make_tree_from_string(str: String, root: Node2D, add_enemy: Callable
 	print(split_str)
 	for object_str in split_str:
 		if object_str.begins_with("enemy"):
-			enemy_from_string.call(object_str, root, add_enemy)
+			enemy_from_string.call(object_str, root)
 		if object_str.begins_with("quadrant"):
-			quadrant_from_string.call(object_str, root, add_quadrant)
+			quadrant_from_string.call(object_str, root)
