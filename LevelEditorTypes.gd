@@ -1,9 +1,10 @@
 class_name LevelEditorTypes
 
 enum PropertyTypes {
-	position = 0,
-	tile_map_data = 1,
-	curve_points,
+	POSITION = 0,
+	TILE_MAP_DATA,
+	CURVE_POINTS,
+	BOOL,
 	# Add a new property ↑↑↑
 }
 
