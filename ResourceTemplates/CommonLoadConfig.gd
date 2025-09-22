@@ -5,8 +5,11 @@ class_name CommonLoadConfig extends Resource
 #	"Walker": preload("res://Enemies/Walker.tscn"),
 #}
 
-@export var quadrantScene: PackedScene # = preload("res://LevelEditor/quadrant.tscn")
+@export var QuadrantScene: PackedScene # = preload("res://LevelEditor/quadrant.tscn")
 
-func _init(_enemiesScenes: Dictionary[String, PackedScene], _quadrantScene: PackedScene) -> void:
+@export var CoinScene: PackedScene
+
+func _init(_enemiesScenes: Dictionary[String, PackedScene], quadrantScene: PackedScene, coinScene: PackedScene) -> void:
 	enemiesScenes = _enemiesScenes
-	quadrantScene = _quadrantScene
+	QuadrantScene = quadrantScene
+	CoinScene = coinScene

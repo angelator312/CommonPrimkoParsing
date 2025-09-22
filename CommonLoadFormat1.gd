@@ -17,7 +17,7 @@ static func load(_level_name: String, path: String, root: Node2D, _config: Commo
 
 
 static func add_quadrant(properties: Dictionary[String, Variant], root: Node2D):
-	var node: Node2D = config.quadrantScene.instantiate()
+	var node: Node2D = config.QuadrantScene.instantiate()
 	print("quadrant name:", node.name)
 	add_child(node, root, properties)
 
