@@ -112,7 +112,6 @@ static func make_tree_from_string(str: String, root: Node2D):
 		print("You try to load not a level file!")
 		return
 	var split_str = str.split("[", false)
-	print(split_str)
 	for object_str in split_str:
 		if object_str.begins_with("enemy"):
 			enemy_from_string(object_str, root)
