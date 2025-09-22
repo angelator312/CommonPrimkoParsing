@@ -4,7 +4,7 @@ enum PropertyTypes {
 	POSITION = 0,
 	TILE_MAP_DATA,
 	CURVE_POINTS,
-	BOOL,
+	IS_SECOND,
 	# Add a new property ↑↑↑
 }
 
