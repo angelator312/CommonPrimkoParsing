@@ -27,10 +27,7 @@ static func split_props(stringifiedProps: String) -> Dictionary[String, Variant]
 
 static func parse_property(str: String) -> Variant:
 	if str.begins_with("Vector2"):
-		str = str.trim_prefix("Vector2(").trim_suffix(")")
-		var str_split = str.split(",")
-		var vec: Vector2 = Vector2(float(str_split[0]), float(str_split[1]))
-		return vec
+		return parse_vector2_string(str)
 	if str.begins_with("PackedByteArray"):
 		str = str.trim_prefix("PackedByteArray(").trim_suffix(")")
 		var str_split = str.split(",")
@@ -101,3 +98,12 @@ static func make_tree_from_string(str: String, root: Node2D):
 			quadrant_from_string(object_str, root)
 		if object_str.begins_with("coin"):
 			coin_from_string(object_str, root)
+
+
+static func parse_vector2_string(str: String) -> Vector2:
+	str = str.trim_prefix("Vector2(").trim_suffix(")")
+	var str_split = str.split(",")
+	var vec: Vector2 = Vector2(float(str_split[0]), float(str_split[1]))
+	return vec
+
+# Add another parsing functions ↑↑↑
