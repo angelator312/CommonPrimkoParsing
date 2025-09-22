@@ -28,6 +28,10 @@ static func split_props(stringifiedProps: String) -> Dictionary[String, Variant]
 static func parse_property(str: String) -> Variant:
 	if str.begins_with("Vector2"):
 		return parse_vector2_string(str)
+	
+	if str.begins_with("Bool"):
+		return parse_bool_string(str)
+	
 	if str.begins_with("PackedByteArray"):
 		str = str.trim_prefix("PackedByteArray(").trim_suffix(")")
 		var str_split = str.split(",")
@@ -36,6 +40,7 @@ static func parse_property(str: String) -> Variant:
 			arr.append(int(e))
 		var vec: PackedByteArray = PackedByteArray(arr).decompress(LevelEditorTypes.MAX_BUFFER_SIZE, LevelEditorTypes.QUDRANT_COMPRESS)
 		return vec
+	
 	if str.begins_with("Array<Vector2>"):
 		str = str.trim_prefix("Array<Vector2>(").trim_suffix(")")
 		var str_split = str.split(",", false)
@@ -50,6 +55,7 @@ static func parse_property(str: String) -> Variant:
 			else:
 				prev = float(e)
 		return arr
+	
 	return ""
 
 
@@ -123,5 +129,11 @@ static func parse_vector2_string(str: String) -> Vector2:
 	var str_split = str.split(",")
 	var vec: Vector2 = Vector2(float(str_split[0]), float(str_split[1]))
 	return vec
+
+
+static func parse_bool_string(str: String) -> bool:
+	str = str.trim_prefix("Bool(").trim_suffix(")")
+	return str == "true"
+
 
 # Add another parsing functions ↑↑↑
