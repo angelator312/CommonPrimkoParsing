@@ -32,7 +32,7 @@ static func parse_property(str: String) -> Variant:
 		var vec: Vector2 = Vector2(float(str_split[0]), float(str_split[1]))
 		return vec
 	if str.begins_with("PackedByteArray"):
-		str = str.trim_prefix("Vector2(").trim_suffix(")")
+		str = str.trim_prefix("PackedByteArray(").trim_suffix(")")
 		var str_split = str.split(",")
 		var arr: Array = []
 		for e in str_split:
