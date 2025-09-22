@@ -34,6 +34,12 @@ static func add_enemy(type: String, properties: Dictionary[String, Variant], roo
 	add_child(node, root, properties)
 
 
+static func add_artefact(type: String, properties: Dictionary[String, Variant], root: Node2D):
+	print("artefact scenes:", config.artefactsScenes)
+	var node: Node2D = config.artefactsScenes.get(type).instantiate()
+	add_child(node, root, properties)
+
+
 static func add_child(node, root, properties: Dictionary[String, Variant]):
 	add_object_as_a_child(node, root)
 	CommonParsingFormat1.set_properties_of_object(node, properties)

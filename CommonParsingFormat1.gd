@@ -85,6 +85,22 @@ static func coin_from_string(encodedCoin: String, root: Node2D):
 	CommonLoadFormat1.add_coin(props, root)
 
 
+static func artefact_from_string(encodedEnemy: String, root: Node2D):
+	print("artefact:", encodedEnemy)
+	encodedEnemy = encodedEnemy.trim_prefix("artefact type=")
+	var type = ""
+	for e in encodedEnemy:
+		if e == "]":
+			break
+		type += e
+	encodedEnemy = encodedEnemy.trim_prefix(type).trim_prefix("]\n")
+	type = type.trim_prefix("\"").trim_suffix("\"")
+	print(type)
+	var props = split_props(encodedEnemy)
+	print("props:", props)
+	CommonLoadFormat1.add_artefact(type, props, root)
+
+
 static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
 		print("You try to load not a level file!")
@@ -98,6 +114,8 @@ static func make_tree_from_string(str: String, root: Node2D):
 			quadrant_from_string(object_str, root)
 		if object_str.begins_with("coin"):
 			coin_from_string(object_str, root)
+		if object_str.begins_with("artefact"):
+			artefact_from_string(object_str, root)
 
 
 static func parse_vector2_string(str: String) -> Vector2:
