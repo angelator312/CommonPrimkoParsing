@@ -78,3 +78,16 @@ static func enemy_from_string(encodedEnemy: String, root: Node2D, add_enemy: Cal
 	var props = split_props(encodedEnemy)
 	print("props:", props)
 	add_enemy.call(type, props, root)
+
+
+static func make_tree_from_string(str: String, root: Node2D, add_enemy: Callable, add_quadrant: Callable):
+	if !str.begins_with("[level"):
+		print("You try to load not a level file!")
+		return
+	var split_str = str.split("[", false)
+	print(split_str)
+	for object_str in split_str:
+		if object_str.begins_with("enemy"):
+			enemy_from_string.call(object_str, root, add_enemy)
+		if object_str.begins_with("quadrant"):
+			quadrant_from_string.call(object_str, root, add_quadrant)
