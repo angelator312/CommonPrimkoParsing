@@ -4,6 +4,7 @@ enum PropertyTypes {
 	position = 0,
 	tile_map_data = 1,
 	curve_points,
+	# Add a new property ↑↑↑
 }
 
 const QUDRANT_COMPRESS: FileAccess.CompressionMode = FileAccess.COMPRESSION_FASTLZ
