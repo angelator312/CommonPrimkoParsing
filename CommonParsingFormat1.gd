@@ -66,6 +66,13 @@ static func quadrant_from_string(encodedQuadrant: String, root: Node2D):
 	print("props:", props)
 	CommonLoadFormat1.add_quadrant(props, root)
 
+static func checkpoint_from_string(encodedCheckpoint: String, root: Node2D):
+	print("checkpoint:", encodedCheckpoint)
+	encodedCheckpoint = encodedCheckpoint.trim_prefix("checkpoint type=\"Checkpoint\"]\n")
+	var props = split_props(encodedCheckpoint)
+	print("props:", props)
+	CommonLoadFormat1.add_checkpoint(props, root)
+
 
 static func enemy_from_string(encodedEnemy: String, root: Node2D):
 	print("enemy:", encodedEnemy)
@@ -121,6 +128,8 @@ static func make_tree_from_string(str: String, root: Node2D):
 			coin_from_string(object_str, root)
 		if object_str.begins_with("artefact"):
 			artefact_from_string(object_str, root)
+		if object_str.begins_with("checkpoint"):
+			checkpoint_from_string(object_str, root)
 
 
 static func parse_vector2_string(str: String) -> Vector2:

@@ -21,6 +21,11 @@ static func add_quadrant(properties: Dictionary[String, Variant], root: Node2D):
 	print("quadrant name:", node.name)
 	add_child(node, root, properties)
 
+static func add_checkpoint(properties: Dictionary[String, Variant], root: Node2D):
+	var node: Node2D = config.CheckpointScene.instantiate()
+	print("checkpoint name:", node.name)
+	add_child(node, root, properties)
+
 
 static func add_coin(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = config.CoinScene.instantiate()
