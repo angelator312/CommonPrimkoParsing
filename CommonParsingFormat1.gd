@@ -32,6 +32,9 @@ static func parse_property(str: String) -> Variant:
 	if str.begins_with("Bool"):
 		return parse_bool_string(str)
 	
+	if str.begins_with("NodePath"):
+		return parse_node_path_string(str)
+	
 	if str.begins_with("PackedByteArray"):
 		str = str.trim_prefix("PackedByteArray(").trim_suffix(")")
 		var str_split = str.split(",")
@@ -65,6 +68,7 @@ static func quadrant_from_string(encodedQuadrant: String, root: Node2D):
 	var props = split_props(encodedQuadrant)
 	print("props:", props)
 	CommonLoadFormat1.add_quadrant(props, root)
+
 
 static func checkpoint_from_string(encodedCheckpoint: String, root: Node2D):
 	print("checkpoint:", encodedCheckpoint)
@@ -143,5 +147,9 @@ static func parse_bool_string(str: String) -> bool:
 	str = str.trim_prefix("Bool(").trim_suffix(")")
 	return str == "true"
 
+
+static func parse_node_path_string(str: String) -> NodePath:
+	str = str.trim_prefix("NodePath(").trim_suffix(")")
+	return NodePath(str)
 
 # Add another parsing functions ↑↑↑
