@@ -148,7 +148,7 @@ static func make_tree_from_string(str: String, root: Node2D):
 			checkpoint_from_string(object_str, root)
 
 		if object_str.begins_with("player"):
-			player_from_string(str, root)
+			player_from_string(object_str, root)
 
 
 static func parse_vector2_string(str: String) -> Vector2:
