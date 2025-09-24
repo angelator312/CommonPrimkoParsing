@@ -118,6 +118,14 @@ static func artefact_from_string(encodedEnemy: String, root: Node2D):
 	CommonLoadFormat1.add_artefact(type, props, root)
 
 
+static func player_from_string(encodedPlayer: String, root: Node2D):
+	print("player:", encodedPlayer)
+	encodedPlayer = encodedPlayer.trim_prefix("player type=\"Player\"]\n")
+	var props = split_props(encodedPlayer)
+	print("props:", props)
+	CommonLoadFormat1.add_player(props, root)
+
+
 static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
 		print("You try to load not a level file!")
@@ -126,14 +134,21 @@ static func make_tree_from_string(str: String, root: Node2D):
 	for object_str in split_str:
 		if object_str.begins_with("enemy"):
 			enemy_from_string(object_str, root)
+		
 		if object_str.begins_with("quadrant"):
 			quadrant_from_string(object_str, root)
+		
 		if object_str.begins_with("coin"):
 			coin_from_string(object_str, root)
+		
 		if object_str.begins_with("artefact"):
 			artefact_from_string(object_str, root)
+		
 		if object_str.begins_with("checkpoint"):
 			checkpoint_from_string(object_str, root)
+
+		if object_str.begins_with("player"):
+			player_from_string(str, root)
 
 
 static func parse_vector2_string(str: String) -> Vector2:

@@ -21,6 +21,7 @@ static func add_quadrant(properties: Dictionary[String, Variant], root: Node2D):
 	print("quadrant name:", node.name)
 	add_child(node, root, properties)
 
+
 static func add_checkpoint(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = config.CheckpointScene.instantiate()
 	print("checkpoint name:", node.name)
@@ -61,3 +62,10 @@ static func add_object_as_a_child(enemy: Node2D, root: Node2D):
 	enemy.name = str(par.get_child_count())
 	par.add_child(enemy)
 	enemy.owner = root
+
+
+static func add_player(properties: Dictionary[String, Variant], root: Node2D):
+	var node: Node2D = config.PlayerScene.instantiate()
+	print("player name:", node.name)
+	add_child(node, root, properties)
+
