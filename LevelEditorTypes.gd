@@ -5,7 +5,7 @@ enum PropertyTypes {
 	TILE_MAP_DATA,
 	CURVE_POINTS,
 	IS_SECOND,
-	PLAYER_PARTICLES_GROUP,
+	PLAYER_PARTICLES_GROUP_PATH,
 	# Add a new property ↑↑↑
 }
 
