@@ -6,6 +6,8 @@ enum PropertyTypes {
 	CURVE_POINTS,
 	IS_SECOND,
 	PLAYER_PARTICLES_GROUP_PATH,
+	PLAYER_PATH,
+	END_PATH,
 	# Add a new property ↑↑↑
 }
 
