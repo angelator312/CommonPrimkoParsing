@@ -2,6 +2,9 @@ class_name CommonLoadFormat1
 
 static var config: CommonLoadConfig
 
+static var playerNodeInTheTree: Node
+static var endVortexNodeInTheTree: Node
+
 static func delete_all_children_recursive(root: Node2D):
 	for node in root.get_children():
 		delete_all_children_recursive(node)
@@ -44,6 +47,15 @@ static func add_artefact(type: String, properties: Dictionary[String, Variant], 
 	print("artefact scenes:", config.artefactsScenes)
 	var node: Node2D = config.artefactsScenes.get(type).instantiate()
 	add_child(node, root, properties)
+	if type == "EndVortex":
+		endVortexNodeInTheTree = node
+
+
+static func add_player(properties: Dictionary[String, Variant], root: Node2D):
+	var node: Node2D = config.PlayerScene.instantiate()
+	print("player name:", node.name)
+	add_child(node, root, properties)
+	playerNodeInTheTree = node
 
 
 static func add_child(node, root, properties: Dictionary[String, Variant]):
@@ -62,10 +74,3 @@ static func add_object_as_a_child(enemy: Node2D, root: Node2D):
 	enemy.name = str(par.get_child_count())
 	par.add_child(enemy)
 	enemy.owner = root
-
-
-static func add_player(properties: Dictionary[String, Variant], root: Node2D):
-	var node: Node2D = config.PlayerScene.instantiate()
-	print("player name:", node.name)
-	add_child(node, root, properties)
-
