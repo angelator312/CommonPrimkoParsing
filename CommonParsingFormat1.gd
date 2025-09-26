@@ -1,6 +1,6 @@
 class_name CommonParsingFormat1
 
-static func set_properties_of_object(node: Node2D, properties: Dictionary[String, Variant]):
+static func set_properties_of_object(node: Node, properties: Dictionary[String, Variant]):
 	for prop in properties:
 		print("prop:", prop, " ", properties[prop])
 		match prop:
@@ -126,6 +126,14 @@ static func player_from_string(encodedPlayer: String, root: Node2D):
 	CommonLoadFormat1.add_player(props, root)
 
 
+static func hud_layer_from_string(encodedHUDLayer: String, root: Node2D):
+	print("hud_layer:", encodedHUDLayer)
+	encodedHUDLayer = encodedHUDLayer.trim_prefix("hud_layer type=\"HUDLayer\"]\n")
+	var props = split_props(encodedHUDLayer)
+	print("props:", props)
+	CommonLoadFormat1.add_hud_layer(props, root)
+
+
 static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
 		print("You try to load not a level file!")
@@ -149,6 +157,9 @@ static func make_tree_from_string(str: String, root: Node2D):
 
 		if object_str.begins_with("player"):
 			player_from_string(object_str, root)
+
+		if object_str.begins_with("hud_layer"):
+			hud_layer_from_string(object_str, root)
 
 
 static func parse_vector2_string(str: String) -> Vector2:

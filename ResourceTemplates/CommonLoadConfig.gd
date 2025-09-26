@@ -15,6 +15,8 @@ class_name CommonLoadConfig extends Resource
 
 @export var PlayerScene: PackedScene
 
+@export var HUDLayerScene: PackedScene
+
 func _init(_enemiesScenes: Dictionary[String, PackedScene], _artefactsScenes: Dictionary[String, PackedScene], quadrantScene: PackedScene, coinScene: PackedScene) -> void:
 	enemiesScenes = _enemiesScenes
 	artefactsScenes = _artefactsScenes

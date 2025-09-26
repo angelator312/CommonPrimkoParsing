@@ -46,6 +46,12 @@ static func add_artefact(type: String, properties: Dictionary[String, Variant], 
 	add_child(node, root, properties)
 
 
+static func add_hud_layer(properties: Dictionary[String, Variant], root: Node2D):
+	var node: Node2D = config.HUDLayerScene.instantiate()
+	print("hud_layer name:", node.name) # Only for debug purposes
+	add_child(node, root, properties)
+
+
 static func add_child(node, root, properties: Dictionary[String, Variant]):
 	add_object_as_a_child(node, root)
 	CommonParsingFormat1.set_properties_of_object(node, properties)
