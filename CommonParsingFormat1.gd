@@ -10,6 +10,11 @@ static func set_properties_of_object(node: Node, properties: Dictionary[String, 
 				node.curve = Curve2D.new()
 				for e in properties[prop]:
 					node.curve.add_point(e)
+			"tile_map_data":
+				assert(node is TileMapLayer, "Node need to be tile map layer")
+				if (node is TileMapLayer):
+					for now_func in properties[prop]:
+						TileMapLayerFunctions.run_tile_map_layer_func(now_func,node)
 			_:
 				node.set(prop, properties[prop])
 
@@ -23,7 +28,7 @@ static func split_props(stringifiedProps: String) -> Dictionary[String, Variant]
 		var prop_value = parse_property(split_prop[1])
 		out.get_or_add(property, prop_value)
 	return out
-		
+
 
 static func parse_property(str: String) -> Variant:
 	if str.begins_with("Vector2"):
@@ -58,6 +63,9 @@ static func parse_property(str: String) -> Variant:
 			else:
 				prev = float(e)
 		return arr
+	
+	if str.begins_with("TileMapLayerFunctions"):
+		return TileMapLayerFunctions.parse_tile_map_layer_functions(str)
 	
 	return ""
 
