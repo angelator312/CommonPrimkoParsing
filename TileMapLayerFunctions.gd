@@ -44,6 +44,7 @@ static func run_platform_func(params: Array, tile_map_layer: TileMapLayer):
 		print("set_cells:", cells[0])
 		for tile in cells:
 			tile_map_layer.set_cell(tile, 1, Vector2i(0, 0))
+		tile_map_layer.set_cells_terrain_connect(cells, 0, 1)
 
 
 static func get_cells(minX: int, minY: int, maxX: int, maxY: int) -> Array[Vector2i]:
