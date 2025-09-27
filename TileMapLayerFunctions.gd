@@ -36,15 +36,19 @@ static func run_tile_map_layer_func(function: TileMapLayerFunc, tile_map_layer: 
 
 static func run_platform_func(params: Array, tile_map_layer: TileMapLayer):
 	print("params of platform func:", params)
-	var cells = get_cells(params[0], params[1], params[0] + params[2], params[1] + params[3])
-	print("cells:", cells)
-	var terrainObject = terrainConfigs[params[4]-1]
-	tile_map_layer.set_cell(cells, terrainObject.x, terrainObject.y)
+	var cells: Array[Vector2i] = get_cells(params[0], params[1], params[0] + params[2], params[1] + params[3])
+	var terrainObject = terrainConfigs[params[4] - 1]
+	if params[3] == 0:
+		if !cells.is_empty():
+			print("empty cells")
+		print("set_cells:", cells[0])
+		for tile in cells:
+			tile_map_layer.set_cell(tile, 1, Vector2i(0, 0))
 
 
-static func get_cells(minX: int, minY: int, maxX: int, maxY: int):
-	var cells = []
-	for x in range(minX, maxX):
-		for y in range(minY, maxY):
+static func get_cells(minX: int, minY: int, maxX: int, maxY: int) -> Array[Vector2i]:
+	var cells: Array[Vector2i] = []
+	for x in range(minX, maxX + 1):
+		for y in range(minY, maxY + 1):
 			cells.push_back(Vector2i(x, y))
 	return cells
