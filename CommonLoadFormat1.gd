@@ -2,7 +2,7 @@ class_name CommonLoadFormat1
 
 static var config: CommonLoadConfig
 
-static func delete_all_children_recursive(root: Node2D):
+static func delete_all_children_recursive(root: Node):
 	for node in root.get_children():
 		delete_all_children_recursive(node)
 		if node.name.is_valid_int():
@@ -47,7 +47,7 @@ static func add_artefact(type: String, properties: Dictionary[String, Variant], 
 
 
 static func add_hud_layer(properties: Dictionary[String, Variant], root: Node2D):
-	var node: Node2D = config.HUDLayerScene.instantiate()
+	var node: CanvasLayer = config.HUDLayerScene.instantiate()
 	print("hud_layer name:", node.name) # Only for debug purposes
 	add_child(node, root, properties)
 
@@ -57,7 +57,7 @@ static func add_child(node, root, properties: Dictionary[String, Variant]):
 	CommonParsingFormat1.set_properties_of_object(node, properties)
 
 
-static func add_object_as_a_child(enemy: Node2D, root: Node2D):
+static func add_object_as_a_child(enemy: Node, root: Node2D):
 	var par = root.get_node_or_null(NodePath(enemy.name))
 	if par == null || par.is_queued_for_deletion():
 		par = Node2D.new()
@@ -74,4 +74,3 @@ static func add_player(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = config.PlayerScene.instantiate()
 	print("player name:", node.name)
 	add_child(node, root, properties)
-
