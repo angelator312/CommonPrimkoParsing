@@ -35,7 +35,6 @@ static func run_tile_map_layer_func(function: TileMapLayerFunc, tile_map_layer: 
 
 
 static func run_platform_func(params: Array, tile_map_layer: TileMapLayer):
-	print("params of platform func:", params)
 	var cells: Array[Vector2i] = get_cells(params[0], params[1], params[0] + params[2], params[1] + params[3])
 	var terrainObject = terrainConfigs[params[4] - 1]
 	var terrain_set: int
@@ -47,9 +46,6 @@ static func run_platform_func(params: Array, tile_map_layer: TileMapLayer):
 		terrain_set = terrainObject.z
 		terrain_in_terrain_set = terrainObject.w
 
-	if !cells.is_empty():
-		print("empty cells")
-	print("set_cells:", cells[0])
 	for tile in cells:
 		tile_map_layer.set_cell(tile, 1, Vector2i(0, 0))
 	tile_map_layer.set_cells_terrain_connect(cells, terrain_set, terrain_in_terrain_set)
