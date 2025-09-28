@@ -30,6 +30,34 @@ static func split_props(stringifiedProps: String) -> Dictionary[String, Variant]
 	return out
 
 
+static func make_tree_from_string(str: String, root: Node2D):
+	if !str.begins_with("[level"):
+		print("You try to load not a level file!")
+		return
+	var split_str = str.split("[", false)
+	for object_str in split_str:
+		if object_str.begins_with("enemy"):
+			enemy_from_string(object_str, root)
+		
+		if object_str.begins_with("quadrant"):
+			quadrant_from_string(object_str, root)
+		
+		if object_str.begins_with("coin"):
+			coin_from_string(object_str, root)
+		
+		if object_str.begins_with("artefact"):
+			artefact_from_string(object_str, root)
+		
+		if object_str.begins_with("checkpoint"):
+			checkpoint_from_string(object_str, root)
+
+		if object_str.begins_with("player"):
+			player_from_string(object_str, root)
+
+		if object_str.begins_with("hud_layer"):
+			hud_layer_from_string(object_str, root)
+
+
 static func quadrant_from_string(encodedQuadrant: String, root: Node2D):
 	print("quadrant:", encodedQuadrant)
 	encodedQuadrant = encodedQuadrant.trim_prefix("quadrant type=\"Quadrant\"]\n")
@@ -100,32 +128,3 @@ static func hud_layer_from_string(encodedHUDLayer: String, root: Node2D):
 	var props = split_props(encodedHUDLayer)
 	print("props:", props)
 	CommonLoadFormat1.add_hud_layer(props, root)
-
-
-static func make_tree_from_string(str: String, root: Node2D):
-	if !str.begins_with("[level"):
-		print("You try to load not a level file!")
-		return
-	var split_str = str.split("[", false)
-	for object_str in split_str:
-		if object_str.begins_with("enemy"):
-			enemy_from_string(object_str, root)
-		
-		if object_str.begins_with("quadrant"):
-			quadrant_from_string(object_str, root)
-		
-		if object_str.begins_with("coin"):
-			coin_from_string(object_str, root)
-		
-		if object_str.begins_with("artefact"):
-			artefact_from_string(object_str, root)
-		
-		if object_str.begins_with("checkpoint"):
-			checkpoint_from_string(object_str, root)
-
-		if object_str.begins_with("player"):
-			player_from_string(object_str, root)
-
-		if object_str.begins_with("hud_layer"):
-			hud_layer_from_string(object_str, root)
-
