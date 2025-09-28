@@ -69,30 +69,6 @@ static func checkpoint_from_string(encodedCheckpoint: String, root: Node2D):
 	CommonLoadFormat1.add_checkpoint(props, root)
 
 
-static func coin_from_string(encodedCoin: String, root: Node2D):
-	print("coin:", encodedCoin)
-	encodedCoin = encodedCoin.trim_prefix("coin type=\"Coin\"]\n")
-	var props = split_props(encodedCoin)
-	print("props:", props)
-	CommonLoadFormat1.add_coin(props, root)
-
-
-static func artefact_from_string(encodedEnemy: String, root: Node2D):
-	print("artefact:", encodedEnemy)
-	encodedEnemy = encodedEnemy.trim_prefix("artefact type=")
-	var type = ""
-	for e in encodedEnemy:
-		if e == "]":
-			break
-		type += e
-	encodedEnemy = encodedEnemy.trim_prefix(type).trim_prefix("]\n")
-	type = type.trim_prefix("\"").trim_suffix("\"")
-	print(type)
-	var props = split_props(encodedEnemy)
-	print("props:", props)
-	CommonLoadFormat1.add_artefact(type, props, root)
-
-
 static func player_from_string(encodedPlayer: String, root: Node2D):
 	print("player:", encodedPlayer)
 	encodedPlayer = encodedPlayer.trim_prefix("player type=\"Player\"]\n")

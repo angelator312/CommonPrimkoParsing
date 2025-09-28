@@ -46,18 +46,6 @@ static func add_checkpoint(properties: Dictionary[String, Variant], root: Node2D
 	add_child(node, root, properties)
 
 
-static func add_coin(properties: Dictionary[String, Variant], root: Node2D):
-	var node: Node2D = config.CoinScene.instantiate()
-	print("coin name:", node.name)
-	add_child(node, root, properties)
-
-
-static func add_artefact(type: String, properties: Dictionary[String, Variant], root: Node2D):
-	print("artefact scenes:", config.artefactsScenes)
-	var node: Node2D = config.artefactsScenes.get(type).instantiate()
-	add_child(node, root, properties)
-
-
 static func add_hud_layer(properties: Dictionary[String, Variant], root: Node2D):
 	var node: CanvasLayer = config.HUDLayerScene.instantiate()
 	print("hud_layer name:", node.name) # Only for debug purposes
