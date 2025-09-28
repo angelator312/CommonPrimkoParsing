@@ -1,3 +1,4 @@
+extends CommonGameObject
 # How to add new game object
 # - Coin:the name of the game object, but in PascalCase (like `Checkpoint`)
 # - coin:Coin but in snake_case (like `checkpoint`)

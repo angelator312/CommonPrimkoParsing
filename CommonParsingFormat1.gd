@@ -40,7 +40,7 @@ static func load_all_scripts_in_folder(folder_path: String) -> Array[Resource]:
 	while file_name != "":
 		if file_name.ends_with(".gd"):
 			var script_path = folder_path.path_join(file_name)
-			var script = ResourceLoader.load(script_path)
+			var script = ResourceLoader.load(script_path, "", ResourceLoader.CACHE_MODE_IGNORE)
 			if script:
 				scripts.append(script)
 		file_name = dir.get_next()
@@ -48,21 +48,12 @@ static func load_all_scripts_in_folder(folder_path: String) -> Array[Resource]:
 	return scripts
 
 
-static func load_all_game_objects_in_folder(folder_path: String) -> Array:
-	var objects: Array[Resource] = load_all_scripts_in_folder(folder_path)
-	# print("all scripts:", objects)
-	# var out: Array[CommonGameObject]
-	# for e in objects:
-	# 	out.push_back(e)
-	return objects
-
-
 static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
 		print("You try to load not a level file!")
 		return
 	var split_str: PackedStringArray = str.split("[", false)
-	var objects: Array = load_all_game_objects_in_folder(CommonLoadFormat1.config.gameObjectsDirectory)
+	var objects: Array = load_all_scripts_in_folder(CommonLoadFormat1.config.gameObjectsDirectory)
 	print("objects:", objects)
 	for object_str in split_str:
 		for object in objects:
