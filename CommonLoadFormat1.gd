@@ -16,6 +16,30 @@ static func load(_level_name: String, path: String, root: Node2D, _config: Commo
 	CommonParsingFormat1.make_tree_from_string(file_contents, root)
 
 
+static func add_object_as_a_child(enemy: Node, root: Node2D):
+	var par = root.get_node_or_null(NodePath(enemy.name))
+	if par == null || par.is_queued_for_deletion():
+		par = Node2D.new()
+		par.name = enemy.name
+		root.add_child(par)
+		par.owner = root
+	par.name = enemy.name
+	enemy.name = str(par.get_child_count())
+	par.add_child(enemy)
+	enemy.owner = root
+
+
+static func add_player(properties: Dictionary[String, Variant], root: Node2D):
+	var node: Node2D = config.PlayerScene.instantiate()
+	print("player name:", node.name)
+	add_child(node, root, properties)
+
+
+static func add_child(node, root, properties: Dictionary[String, Variant]):
+	add_object_as_a_child(node, root)
+	CommonParsingFormat1.set_properties_of_object(node, properties)
+
+
 static func add_quadrant(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = config.QuadrantScene.instantiate()
 	print("quadrant name:", node.name)
@@ -52,27 +76,4 @@ static func add_hud_layer(properties: Dictionary[String, Variant], root: Node2D)
 	add_child(node, root, properties)
 
 
-static func add_child(node, root, properties: Dictionary[String, Variant]):
-	add_object_as_a_child(node, root)
-	CommonParsingFormat1.set_properties_of_object(node, properties)
-
 # Add new add_functions ↓↓↓
-
-
-static func add_object_as_a_child(enemy: Node, root: Node2D):
-	var par = root.get_node_or_null(NodePath(enemy.name))
-	if par == null || par.is_queued_for_deletion():
-		par = Node2D.new()
-		par.name = enemy.name
-		root.add_child(par)
-		par.owner = root
-	par.name = enemy.name
-	enemy.name = str(par.get_child_count())
-	par.add_child(enemy)
-	enemy.owner = root
-
-
-static func add_player(properties: Dictionary[String, Variant], root: Node2D):
-	var node: Node2D = config.PlayerScene.instantiate()
-	print("player name:", node.name)
-	add_child(node, root, properties)
