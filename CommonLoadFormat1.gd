@@ -56,6 +56,8 @@ static func add_child(node, root, properties: Dictionary[String, Variant]):
 	add_object_as_a_child(node, root)
 	CommonParsingFormat1.set_properties_of_object(node, properties)
 
+# Add new add_functions ↓↓↓
+
 
 static func add_object_as_a_child(enemy: Node, root: Node2D):
 	var par = root.get_node_or_null(NodePath(enemy.name))
