@@ -7,6 +7,8 @@
 static func load(object_str: String, root: Node2D):
 	if object_str.begins_with("`name`"):
 		from_string(object_str, root)
+		return true
+	return false
 
 static func from_string(encodedObject: String, root: Node2D):
 	print("`name`:", encodedObject)
@@ -16,7 +18,7 @@ static func from_string(encodedObject: String, root: Node2D):
 	add_node(props, root)
 
 static func add_node(properties: Dictionary[String, Variant], root: Node2D):
-	# var node: Node2D = config.`Name`Scene.instantiate()
-	# print("`name` name:", node.name) # Only for debug purposes
-	# add_child(node, root, properties)
+	#var node: Node2D = CommonLoadFormat1.config.`Name`Scene.instantiate()
+	#print("`name` name:", node.name) # Only for debug purposes
+	#CommonLoadFormat1.add_child(node, root, properties)
 	pass

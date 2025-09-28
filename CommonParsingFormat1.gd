@@ -30,32 +30,44 @@ static func split_props(stringifiedProps: String) -> Dictionary[String, Variant]
 	return out
 
 
+static func load_all_scripts_in_folder(folder_path: String) -> Array[Resource]:
+	var scripts: Array[Resource] = []
+	var dir = DirAccess.open(folder_path)
+	if dir == null:
+		return scripts
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".gd"):
+			var script_path = folder_path.path_join(file_name)
+			var script = ResourceLoader.load(script_path)
+			if script:
+				scripts.append(script)
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	return scripts
+
+
+static func load_all_game_objects_in_folder(folder_path: String) -> Array:
+	var objects: Array[Resource] = load_all_scripts_in_folder(folder_path)
+	# print("all scripts:", objects)
+	# var out: Array[CommonGameObject]
+	# for e in objects:
+	# 	out.push_back(e)
+	return objects
+
+
 static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
 		print("You try to load not a level file!")
 		return
-	var split_str = str.split("[", false)
+	var split_str: PackedStringArray = str.split("[", false)
+	var objects: Array = load_all_game_objects_in_folder(CommonLoadFormat1.config.gameObjectsDirectory)
+	print("objects:", objects)
 	for object_str in split_str:
-		if object_str.begins_with("enemy"):
-			enemy_from_string(object_str, root)
-		
-		if object_str.begins_with("quadrant"):
-			quadrant_from_string(object_str, root)
-		
-		if object_str.begins_with("coin"):
-			coin_from_string(object_str, root)
-		
-		if object_str.begins_with("artefact"):
-			artefact_from_string(object_str, root)
-		
-		if object_str.begins_with("checkpoint"):
-			checkpoint_from_string(object_str, root)
-
-		if object_str.begins_with("player"):
-			player_from_string(object_str, root)
-
-		if object_str.begins_with("hud_layer"):
-			hud_layer_from_string(object_str, root)
+		for object in objects:
+			if object.load(object_str, root):
+				break
 
 
 static func quadrant_from_string(encodedQuadrant: String, root: Node2D):
