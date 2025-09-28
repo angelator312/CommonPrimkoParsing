@@ -61,14 +61,6 @@ static func make_tree_from_string(str: String, root: Node2D):
 				break
 
 
-static func checkpoint_from_string(encodedCheckpoint: String, root: Node2D):
-	print("checkpoint:", encodedCheckpoint)
-	encodedCheckpoint = encodedCheckpoint.trim_prefix("checkpoint type=\"Checkpoint\"]\n")
-	var props = split_props(encodedCheckpoint)
-	print("props:", props)
-	CommonLoadFormat1.add_checkpoint(props, root)
-
-
 static func player_from_string(encodedPlayer: String, root: Node2D):
 	print("player:", encodedPlayer)
 	encodedPlayer = encodedPlayer.trim_prefix("player type=\"Player\"]\n")

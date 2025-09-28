@@ -40,12 +40,6 @@ static func add_child(node, root, properties: Dictionary[String, Variant]):
 	CommonParsingFormat1.set_properties_of_object(node, properties)
 
 
-static func add_checkpoint(properties: Dictionary[String, Variant], root: Node2D):
-	var node: Node2D = config.CheckpointScene.instantiate()
-	print("checkpoint name:", node.name)
-	add_child(node, root, properties)
-
-
 static func add_hud_layer(properties: Dictionary[String, Variant], root: Node2D):
 	var node: CanvasLayer = config.HUDLayerScene.instantiate()
 	print("hud_layer name:", node.name) # Only for debug purposes
