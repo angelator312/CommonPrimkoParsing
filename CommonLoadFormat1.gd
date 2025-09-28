@@ -39,11 +39,3 @@ static func add_child(node, root, properties: Dictionary[String, Variant]):
 	add_object_as_a_child(node, root)
 	CommonParsingFormat1.set_properties_of_object(node, properties)
 
-
-static func add_hud_layer(properties: Dictionary[String, Variant], root: Node2D):
-	var node: CanvasLayer = config.HUDLayerScene.instantiate()
-	print("hud_layer name:", node.name) # Only for debug purposes
-	add_child(node, root, properties)
-
-
-# Add new add_functions ↓↓↓

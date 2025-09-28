@@ -67,11 +67,3 @@ static func player_from_string(encodedPlayer: String, root: Node2D):
 	var props = split_props(encodedPlayer)
 	print("props:", props)
 	CommonLoadFormat1.add_player(props, root)
-
-
-static func hud_layer_from_string(encodedHUDLayer: String, root: Node2D):
-	print("hud_layer:", encodedHUDLayer)
-	encodedHUDLayer = encodedHUDLayer.trim_prefix("hud_layer type=\"HUDLayer\"]\n")
-	var props = split_props(encodedHUDLayer)
-	print("props:", props)
-	CommonLoadFormat1.add_hud_layer(props, root)
