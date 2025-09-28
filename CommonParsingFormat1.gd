@@ -59,11 +59,3 @@ static func make_tree_from_string(str: String, root: Node2D):
 		for object in objects:
 			if object.load(object_str, root):
 				break
-
-
-static func player_from_string(encodedPlayer: String, root: Node2D):
-	print("player:", encodedPlayer)
-	encodedPlayer = encodedPlayer.trim_prefix("player type=\"Player\"]\n")
-	var props = split_props(encodedPlayer)
-	print("props:", props)
-	CommonLoadFormat1.add_player(props, root)
