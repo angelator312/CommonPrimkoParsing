@@ -70,36 +70,12 @@ static func make_tree_from_string(str: String, root: Node2D):
 				break
 
 
-static func quadrant_from_string(encodedQuadrant: String, root: Node2D):
-	print("quadrant:", encodedQuadrant)
-	encodedQuadrant = encodedQuadrant.trim_prefix("quadrant type=\"Quadrant\"]\n")
-	var props = split_props(encodedQuadrant)
-	print("props:", props)
-	CommonLoadFormat1.add_quadrant(props, root)
-
-
 static func checkpoint_from_string(encodedCheckpoint: String, root: Node2D):
 	print("checkpoint:", encodedCheckpoint)
 	encodedCheckpoint = encodedCheckpoint.trim_prefix("checkpoint type=\"Checkpoint\"]\n")
 	var props = split_props(encodedCheckpoint)
 	print("props:", props)
 	CommonLoadFormat1.add_checkpoint(props, root)
-
-
-static func enemy_from_string(encodedEnemy: String, root: Node2D):
-	print("enemy:", encodedEnemy)
-	encodedEnemy = encodedEnemy.trim_prefix("enemy type=")
-	var type = ""
-	for e in encodedEnemy:
-		if e == "]":
-			break
-		type += e
-	encodedEnemy = encodedEnemy.trim_prefix(type).trim_prefix("]\n")
-	type = type.trim_prefix("\"").trim_suffix("\"")
-	print(type)
-	var props = split_props(encodedEnemy)
-	print("props:", props)
-	CommonLoadFormat1.add_enemy(type, props, root)
 
 
 static func coin_from_string(encodedCoin: String, root: Node2D):

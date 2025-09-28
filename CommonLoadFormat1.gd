@@ -40,12 +40,6 @@ static func add_child(node, root, properties: Dictionary[String, Variant]):
 	CommonParsingFormat1.set_properties_of_object(node, properties)
 
 
-static func add_quadrant(properties: Dictionary[String, Variant], root: Node2D):
-	var node: Node2D = config.QuadrantScene.instantiate()
-	print("quadrant name:", node.name)
-	add_child(node, root, properties)
-
-
 static func add_checkpoint(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = config.CheckpointScene.instantiate()
 	print("checkpoint name:", node.name)
@@ -55,12 +49,6 @@ static func add_checkpoint(properties: Dictionary[String, Variant], root: Node2D
 static func add_coin(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = config.CoinScene.instantiate()
 	print("coin name:", node.name)
-	add_child(node, root, properties)
-
-
-static func add_enemy(type: String, properties: Dictionary[String, Variant], root: Node2D):
-	print("scenes:", config.enemiesScenes)
-	var node: Node2D = config.enemiesScenes.get(type).instantiate()
 	add_child(node, root, properties)
 
 
