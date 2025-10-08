@@ -1,53 +1,53 @@
 class_name CommonTypeParsingFormat1
 
-static func parse_property(str: String) -> Variant:
-	if str.begins_with("Vector2"):
-		return parse_vector2_string(str)
+static func parse_property(s: String) -> Variant:
+	if s.begins_with("Vector2"):
+		return parse_vector2_string(s)
 	
-	if str.begins_with("Bool"):
-		return parse_bool_string(str)
+	if s.begins_with("Bool"):
+		return parse_bool_string(s)
 	
-	if str.begins_with("NodePath"):
-		return parse_node_path_string(str)
+	if s.begins_with("NodePath"):
+		return parse_node_path_string(s)
 	
-	if str.begins_with("PackedByteArray"):
-		str = str.trim_prefix("PackedByteArray(").trim_suffix(")")
-		var str_split = str.split(",")
+	if s.begins_with("PackedByteArray"):
+		s = s.trim_prefix("PackedByteArray(").trim_suffix(")")
+		var str_split = s.split(",")
 		var arr: Array = []
 		for e in str_split:
 			arr.append(int(e))
 		var vec: PackedByteArray = PackedByteArray(arr).decompress(LevelEditorTypes.MAX_BUFFER_SIZE, LevelEditorTypes.QUDRANT_COMPRESS)
 		return vec
 	
-	if str.begins_with("Array<Vector2>"):
-		str = str.trim_prefix("Array<Vector2>(").trim_suffix(")")
-		return parse_array_of_vector2(str)
+	if s.begins_with("Array<Vector2>"):
+		s = s.trim_prefix("Array<Vector2>(").trim_suffix(")")
+		return parse_array_of_vector2(s)
 	
-	if str.begins_with("TileMapLayerFunctions"):
-		return TileMapLayerFunctions.parse_tile_map_layer_functions(str)
+	if s.begins_with("TileMapLayerFunctions"):
+		return TileMapLayerFunctions.parse_tile_map_layer_functions(s)
 	
 	return ""
 
 
-static func parse_vector2_string(str: String) -> Vector2:
-	str = str.trim_prefix("Vector2(").trim_suffix(")")
-	var str_split = str.split(",")
+static func parse_vector2_string(s: String) -> Vector2:
+	s = s.trim_prefix("Vector2(").trim_suffix(")")
+	var str_split = s.split(",")
 	var vec: Vector2 = Vector2(float(str_split[0]), float(str_split[1]))
 	return vec
 
 
-static func parse_bool_string(str: String) -> bool:
-	str = str.trim_prefix("Bool(").trim_suffix(")")
-	return str == "true"
+static func parse_bool_string(s: String) -> bool:
+	s = s.trim_prefix("Bool(").trim_suffix(")")
+	return s == "true"
 
 
-static func parse_node_path_string(str: String) -> NodePath:
-	str = str.trim_prefix("NodePath(").trim_suffix(")")
-	return NodePath(str)
+static func parse_node_path_string(s: String) -> NodePath:
+	s = s.trim_prefix("NodePath(").trim_suffix(")")
+	return NodePath(s)
 
 
-static func parse_array_of_vector2(str: String):
-	var str_split = str.split(",", false)
+static func parse_array_of_vector2(s: String):
+	var str_split = s.split(",", false)
 	var arr: Array[Vector2] = []
 	var prev: float = INF
 	for e: String in str_split:

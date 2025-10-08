@@ -48,11 +48,11 @@ static func load_all_scripts_in_folder(folder_path: String) -> Array[Resource]:
 	return scripts
 
 
-static func make_tree_from_string(str: String, root: Node2D):
-	if !str.begins_with("[level"):
+static func make_tree_from_string(s: String, root: Node2D):
+	if !s.begins_with("[level"):
 		MyLogger.e("You try to load not a level file!")
 		return
-	var split_str: PackedStringArray = str.split("[", false)
+	var split_str: PackedStringArray = s.split("[", false)
 	var objects: Array = load_all_scripts_in_folder(CommonLoadFormat1.config.gameObjectsDirectory)
 	MyLogger.objs(objects)
 	for object_str in split_str:

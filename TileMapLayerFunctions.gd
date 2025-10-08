@@ -14,10 +14,10 @@ class TileMapLayerFunc:
 	var params: Array[Variant]
 
 
-static func parse_tile_map_layer_functions(str: String) -> Array[TileMapLayerFunc]:
-	str = str.trim_prefix("TileMapLayerFunctions(").trim_suffix(")")
+static func parse_tile_map_layer_functions(s: String) -> Array[TileMapLayerFunc]:
+	s = s.trim_prefix("TileMapLayerFunctions(").trim_suffix(")")
 	var functions: Array[TileMapLayerFunc] = []
-	var split_str = str.split(";", false)
+	var split_str = s.split(";", false)
 	for now_str in split_str:
 		var function = TileMapLayerFunc.new()
 		if now_str.begins_with("P("):

@@ -25,9 +25,9 @@ static func objs(a: Array):
 	if ARE_AVAILBLE_GAME_OBJECTS_PRINTED:
 		d("objects:", a)
 
-static func props(p: Dictionary[String, Variant]):
+static func props(prs: Dictionary[String, Variant]):
 	if ARE_ALL_PROPS_PRINTED: return
-	d("props:", p)
+	d("props:", prs)
 
 
 static func obj(...args):
