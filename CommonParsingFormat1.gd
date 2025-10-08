@@ -5,7 +5,8 @@ static func set_properties_of_object(node: Node, properties: Dictionary[String, 
 		MyLogger.p(prop, properties[prop])
 		match prop:
 			"position":
-				node.global_position = properties[prop]
+				if node.global_position == Vector2(0, 0):
+					node.global_position = properties[prop]
 			"curve_points":
 				node.curve = Curve2D.new()
 				for e in properties[prop]:
