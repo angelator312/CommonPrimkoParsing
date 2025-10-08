@@ -9,7 +9,7 @@ static func load(object_str: String, root: Node2D):
 	return false
 
 static func _from_string(encodedEnemy: String, root: Node2D):
-	print("artefact:", encodedEnemy)
+	MyLogger.d("artefact:", encodedEnemy)
 	encodedEnemy = encodedEnemy.trim_prefix("artefact type=")
 	var type = ""
 	for e in encodedEnemy:
@@ -18,9 +18,9 @@ static func _from_string(encodedEnemy: String, root: Node2D):
 		type += e
 	encodedEnemy = encodedEnemy.trim_prefix(type).trim_prefix("]\n")
 	type = type.trim_prefix("\"").trim_suffix("\"")
-	print(type)
+	MyLogger.d(type)
 	var props: Dictionary[String, Variant] = CommonParsingFormat1.split_props(encodedEnemy)
-	print("props:", props)
+	MyLogger.props(props)
 	_add_node(type, props, root)
 
 static func _add_node(type: String, properties: Dictionary[String, Variant], root: Node2D):
