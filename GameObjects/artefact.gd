@@ -19,7 +19,7 @@ static func _from_string(encodedEnemy: String, root: Node2D):
 	encodedEnemy = encodedEnemy.trim_prefix(type).trim_prefix("]\n")
 	type = type.trim_prefix("\"").trim_suffix("\"")
 	print(type)
-	var props = CommonParsingFormat1.split_props(encodedEnemy)
+	var props: Dictionary[String, Variant] = CommonParsingFormat1.split_props(encodedEnemy)
 	print("props:", props)
 	_add_node(type, props, root)
 

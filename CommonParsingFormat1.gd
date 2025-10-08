@@ -2,7 +2,7 @@ class_name CommonParsingFormat1
 
 static func set_properties_of_object(node: Node, properties: Dictionary[String, Variant]):
 	for prop in properties:
-		print("prop:", prop, " ", properties[prop])
+		MyLogger.p(prop, properties[prop])
 		match prop:
 			"position":
 				node.global_position = properties[prop]
@@ -50,11 +50,11 @@ static func load_all_scripts_in_folder(folder_path: String) -> Array[Resource]:
 
 static func make_tree_from_string(str: String, root: Node2D):
 	if !str.begins_with("[level"):
-		print("You try to load not a level file!")
+		MyLogger.e("You try to load not a level file!")
 		return
 	var split_str: PackedStringArray = str.split("[", false)
 	var objects: Array = load_all_scripts_in_folder(CommonLoadFormat1.config.gameObjectsDirectory)
-	print("objects:", objects)
+	MyLogger.objs(objects)
 	for object_str in split_str:
 		for object in objects:
 			if object.load(object_str, root):
