@@ -21,12 +21,12 @@ static func from_string(encodedEnemy: String, root: Node2D):
 	type = type.trim_prefix("\"").trim_suffix("\"")
 	MyLogger.d(type)
 	var props = CommonParsingFormat1.split_props(encodedEnemy)
-	MyLogger.props( props)
+	MyLogger.props(props)
 	add_node(type, props, root)
 
 
-static func add_node(type:String,properties: Dictionary[String, Variant], root: Node2D):
-	print("enemy scenes:", CommonLoadFormat1.config.enemiesScenes)
+static func add_node(type: String, properties: Dictionary[String, Variant], root: Node2D):
+	MyLogger.d("enemy scenes:", CommonLoadFormat1.config.enemiesScenes)
 	var node: Node2D = CommonLoadFormat1.config.enemiesScenes.get(type).instantiate()
 	CommonLoadFormat1.add_child(node, root, properties)
 	pass

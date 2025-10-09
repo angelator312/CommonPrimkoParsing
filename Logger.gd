@@ -1,10 +1,10 @@
 class_name MyLogger
 
-static var IS_DEBUG_PRINTED = true
+static var IS_DEBUG_PRINTED: bool = true
 static var IS_OBJECT_STRING_PRINTED: bool = true
-static var IS_PROP_PRINTED = true
-static var ARE_AVAILBLE_GAME_OBJECTS_PRINTED = true
-static var ARE_ALL_PROPS_PRINTED = true
+static var IS_PROP_PRINTED: bool = true
+static var ARE_AVAILBLE_GAME_OBJECTS_PRINTED: bool = true
+static var ARE_ALL_PROPS_PRINTED: bool = true
 
 # debug print
 static func d(...args):
@@ -34,3 +34,19 @@ static func obj(name: String, encodedObject: String):
 	if IS_OBJECT_STRING_PRINTED:
 		print()
 		print(name, encodedObject.strip_edges())
+
+
+static func mute():
+	_set_all_to(false)
+
+
+static func unmute():
+	_set_all_to(true)
+
+
+static func _set_all_to(x: bool):
+	IS_DEBUG_PRINTED = x
+	IS_OBJECT_STRING_PRINTED = x
+	IS_PROP_PRINTED = x
+	ARE_AVAILBLE_GAME_OBJECTS_PRINTED = x
+	ARE_ALL_PROPS_PRINTED = x
