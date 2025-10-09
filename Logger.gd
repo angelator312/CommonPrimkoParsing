@@ -30,6 +30,7 @@ static func props(prs: Dictionary[String, Variant]):
 		d("props:", prs)
 
 
-static func obj(...args):
+static func obj(name: String, encodedObject: String):
 	if IS_OBJECT_STRING_PRINTED:
-		print.callv(args)
+		print()
+		print(name, encodedObject.strip_edges())

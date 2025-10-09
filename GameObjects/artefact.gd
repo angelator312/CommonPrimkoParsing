@@ -9,7 +9,7 @@ static func load(object_str: String, root: Node2D):
 	return false
 
 static func _from_string(encodedEnemy: String, root: Node2D):
-	MyLogger.d("artefact:", encodedEnemy)
+	MyLogger.obj("artefact:", encodedEnemy)
 	encodedEnemy = encodedEnemy.trim_prefix("artefact type=")
 	var type = ""
 	for e in encodedEnemy:

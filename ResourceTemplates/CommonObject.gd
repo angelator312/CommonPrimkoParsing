@@ -11,10 +11,10 @@ static func load(object_str: String, root: Node2D):
 	return false
 
 static func _from_string(encodedObject: String, root: Node2D):
-	print("`name`:", encodedObject)
+	MyLogger.obj("`name`:", encodedObject)
 	encodedObject = encodedObject.trim_prefix("`name` type=\"`Name`\"]\n")
 	var props = CommonParsingFormat1.split_props(encodedObject)
-	print("props:", props)
+	MyLogger.props(props)
 	_add_node(props, root)
 
 static func _add_node(properties: Dictionary[String, Variant], root: Node2D):

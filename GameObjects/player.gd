@@ -11,13 +11,12 @@ static func load(object_str: String, root: Node2D):
 	return false
 
 static func _from_string(encodedObject: String, root: Node2D):
-	print("player:", encodedObject)
+	MyLogger.obj("player:", encodedObject)
 	encodedObject = encodedObject.trim_prefix("player type=\"Player\"]\n")
 	var props = CommonParsingFormat1.split_props(encodedObject)
-	print("props:", props)
+	MyLogger.props( props)
 	_add_node(props, root)
 
 static func _add_node(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = CommonLoadFormat1.config.PlayerScene.instantiate()
-	print("player name:", node.name) # Only for debug purposes
 	CommonLoadFormat1.add_child(node, root, properties)
