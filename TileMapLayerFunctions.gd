@@ -57,3 +57,56 @@ static func get_cells(minX: int, minY: int, maxX: int, maxY: int) -> Array[Vecto
 		for y in range(minY, maxY + 1):
 			cells.push_back(Vector2i(x, y))
 	return cells
+
+
+static func get_tile_map_data_property(node: TileMapLayer) -> String:
+	var usedTilesCoordinates: Array[Vector2i] = node.get_used_cells()
+	var str = ""
+	var usedTiles: Dictionary[Vector2i, bool] = {}
+	var i = 0
+	for tile in usedTilesCoordinates:
+		if usedTiles.get(tile): continue
+		usedTiles.get_or_add(tile, true)
+		var neighbors: Array[Vector2i] = get_neighboring_used_cells(node, tile, usedTiles)
+		var rect = getRect(neighbors)
+		var cell_source_id = node.get_cell_source_id(tile)
+		str = (str + "P(%d,%d,%d,%d,%d);") % [rect.position.x, rect.position.y, rect.size.x, rect.size.y, cell_source_id]
+	
+	# print("cells:", str)
+	return "tile_map_data=TileMapLayerFunctions(%s)" % [str]
+
+static func get_neighboring_used_cells(node: TileMapLayer, tile: Vector2i, usedTiles: Dictionary[Vector2i, bool]) -> Array[Vector2i]:
+	var arr: Array[Vector2i] = []
+	var queue: Array[Vector2i] = []
+	var cell_source_id = node.get_cell_source_id(tile)
+	queue.push_back(tile)
+	arr.push_back(tile)
+	while !queue.is_empty():
+		var now = queue.back()
+		queue.pop_back()
+		for cell in node.get_surrounding_cells(now):
+			if usedTiles.get(cell) != null:
+				continue
+			usedTiles.get_or_add(cell, true)
+			if node.get_cell_source_id(cell) == cell_source_id:
+				arr.push_back(cell)
+				queue.push_back(cell)
+	return arr
+
+
+static func getMinMax(arr: Array[Vector2i]) -> Rect2i:
+	var mn = Vector2i(arr[0].x, arr[0].y);
+	var mx = Vector2i(arr[0].x, arr[0].y);
+	for e in arr:
+		mn.x = min(e.x, mn.x)
+		mn.y = min(e.y, mn.y)
+		mx.x = max(e.x, mx.x)
+		mx.y = max(e.y, mx.y)
+	return Rect2i(mn, mx);
+
+
+static func getRect(arr: Array[Vector2i]) -> Rect2i:
+	var rect = getMinMax(arr)
+	rect.size.x -= rect.position.x
+	rect.size.y -= rect.position.y
+	return rect;
