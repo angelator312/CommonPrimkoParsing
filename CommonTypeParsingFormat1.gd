@@ -26,6 +26,9 @@ static func parse_property(s: String) -> Variant:
 	if s.begins_with("TileMapLayerFunctions"):
 		return TileMapLayerFunctions.parse_tile_map_layer_functions(s)
 	
+	if s.begins_with("Shape2D<WorldBoundary>"):
+		s = s.trim_prefix("Shape2D<WorldBoundary>(").trim_suffix(")")
+		return parse_world_boundary_shape(s)
 	return ""
 
 
@@ -59,5 +62,15 @@ static func parse_array_of_vector2(s: String):
 		else:
 			prev = float(e)
 	return arr
+
+
+static func parse_world_boundary_shape(s: String):
+	var split_s: PackedStringArray = s.split(";", false)
+	assert(split_s.size() == 3, "%s is not valid world boundary string" % [s])
+	var out: WorldBoundaryShape2D = WorldBoundaryShape2D.new()
+	out.normal = parse_vector2_string(split_s[0])
+	out.distance = split_s[1].to_float()
+	out.custom_solver_bias = split_s[2].to_float()
+	return out
 
 # Add new parse_* functions ↓↓↓

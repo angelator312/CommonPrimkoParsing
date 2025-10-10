@@ -8,6 +8,7 @@ enum PropertyTypes {
 	PLAYER_PARTICLES_GROUP_PATH,
 	PLAYER_PATH,
 	END_PATH,
+	SHAPE,
 	# Add a new property ↑↑↑
 }
 
