@@ -10,12 +10,14 @@ static func load(object_str: String, root: Node2D):
 		return true
 	return false
 
+
 static func _from_string(encodedObject: String, root: Node2D):
 	MyLogger.obj("hud_layer:", encodedObject)
 	encodedObject = encodedObject.trim_prefix("hud_layer type=\"HUDLayer\"]\n")
 	var props = CommonParsingFormat1.split_props(encodedObject)
 	MyLogger.props( props)
 	_add_node(props, root)
+
 
 static func _add_node(properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node = CommonLoadFormat1.config.HUDLayerScene.instantiate()

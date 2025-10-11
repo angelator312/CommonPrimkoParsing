@@ -8,6 +8,7 @@ static func load(object_str: String, root: Node2D):
 		return true
 	return false
 
+
 static func _from_string(encodedEnemy: String, root: Node2D):
 	MyLogger.obj("artefact:", encodedEnemy)
 	encodedEnemy = encodedEnemy.trim_prefix("artefact type=")
@@ -22,6 +23,7 @@ static func _from_string(encodedEnemy: String, root: Node2D):
 	var props: Dictionary[String, Variant] = CommonParsingFormat1.split_props(encodedEnemy)
 	MyLogger.props(props)
 	_add_node(type, props, root)
+
 
 static func _add_node(type: String, properties: Dictionary[String, Variant], root: Node2D):
 	var node: Node2D = CommonLoadFormat1.config.artefactsScenes.get(type).instantiate()
