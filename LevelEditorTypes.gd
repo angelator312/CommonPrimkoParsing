@@ -9,6 +9,7 @@ enum PropertyTypes {
 	PLAYER_PATH,
 	END_PATH,
 	SHAPE,
+	CAMERA_LIMITS,
 	# Add a new property ↑↑↑
 }
 
