@@ -7,6 +7,10 @@ static func parse_property(s: String) -> Variant:
 	if s.begins_with("Bool"):
 		return parse_bool_string(s)
 	
+	if s.begins_with("Int"):
+		s = s.trim_prefix("Int(").trim_suffix(")")
+		return s.to_int()
+	
 	if s.begins_with("NodePath"):
 		return parse_node_path_string(s)
 	
