@@ -16,3 +16,4 @@ enum PropertyTypes {
 const QUDRANT_COMPRESS: FileAccess.CompressionMode = FileAccess.COMPRESSION_FASTLZ
 const MAX_BUFFER_SIZE: int = int(1e5)
 const ARG_FOR_STARTING_LEVEL: String = "--start-level-path"
+const ARG_FOR_TIME_IN_LEVEL: String = "--time"
